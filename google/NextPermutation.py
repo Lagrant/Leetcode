@@ -1,0 +1,16 @@
+class Solution:
+    def nextPermutation(self, nums) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        for i in range(len(nums) - 2, 0-1, -1):
+            if (nums[i] < nums[i+1]):
+                for j in range(len(nums) - 1, i, -1):
+                    if (nums[j] > nums[i]):
+                        nums[j], nums[i] = nums[i], nums[j]
+                        nums[i+1:] = sorted(nums[i+1:])
+                        break
+                break
+            elif (i == 0):
+                nums.sort()
+        

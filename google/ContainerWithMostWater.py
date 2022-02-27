@@ -1,4 +1,11 @@
 class Solution:
+    """
+    The key idea is to realize that given inital size, the only way
+    to potientially improve it is to replace the shorter line with a 
+    longer one on its side. So find a longer line on the shorter side 
+    over and over again until the left side and the right side come 
+    together.
+    """
     def maxArea(self, height) -> int:
         start = 0
         end = len(height) - 1

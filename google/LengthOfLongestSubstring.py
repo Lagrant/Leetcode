@@ -1,4 +1,10 @@
 class Solution:
+    """
+    Store chars in a dict, the key thing is that the new 
+    coming char may hit (1) before the start; (2) on the 
+    start; (3) after the start. Deal with these cases one
+    by one.
+    """
     def lengthOfLongestSubstring(self, s: str) -> int:
 
         s_d = {}

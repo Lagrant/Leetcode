@@ -1,4 +1,8 @@
 class Solution:
+    """
+    KMP algorithm
+    str.index() can also do this
+    """
     def lengthOfLongestSubstring(self, s: str, needle: str) -> int:
         value_table = [0] * len(s)
         i, j = 0, 1

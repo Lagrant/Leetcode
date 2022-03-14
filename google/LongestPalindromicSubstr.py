@@ -1,34 +1,20 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        if (len(s) == 0 or len(s) == 1):
-            return s
-        
-        if (len(s) == 2):
-            if (s[0] == s[1]):
-                return s
-            else:
-                return s[0]
-                
-        max_len = -1
-        max_palin = ''
-        half_palin = ''
-        for i in range(len(s)):
-            half_palin = s[i]
-            mid = i
-            for j in range(i + 1, len(s)):
-                if (half_palin == s[mid+1:j+1]):
-                    if (j - i + 1 > max_len):
-                        max_len = j - i + 1
-                        max_palin = s[i:j+1]
-                if (int((j - i + 1) / 2) + i> mid):
-                    mid = int((j - i + 1) / 2) + i
-                else:
-                    if (mid > i):
-                        half_palin = s[mid] + half_palin
-        if (max_palin == ''):
-            return s[0]
-        return max_palin
+        if (len(s) == 0):
+            return ''
 
-sol = Solution()
-print(sol.longestPalindrome("abccba"))
-        
+        start, end = 0, 0
+        for i in range(len(s)):
+            l1 = self.expend(s, i, i)
+            l2 = self.expend(s, i, i + 1)
+            max_l = max(l1, l2)
+            if (max_l > end - start):
+                start = i - (max_l - 1) // 2
+                end = i + max_l // 2
+        return s[start:end + 1]
+    
+    def expend(self, s, left, right):
+        while (left >= 0 and right < len(s) and s[left] == s[right]):
+            left -= 1
+            right += 1
+        return right - left - 1

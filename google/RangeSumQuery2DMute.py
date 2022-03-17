@@ -14,6 +14,31 @@ class NumMatrix:
                 accu += self.matrix[i][j]
         return accu
 
+"""
+private int bit[];  // initialize all entries in bit array to 0
+private int nums[]; // given nums array (ASSUME 1-based indexing)
+private int n;      // size of nums array
+
+private int lsb(int n) {
+    // the line below allows us to directly capture the right most non-zero bit of a number
+    return n & (-n);
+}
+
+private void updateBIT(int i, int val) {
+    // keep adding lsb(i) to i and add val to bit[i]
+    for (; i <= n; i += lsb(i)) {
+        this.bit[i] += val;
+    }
+}
+
+private int buildBIT() {
+    for (int k = 1; k <= n; ++k) {
+        int i = k, val = this.nums[k];
+        updateBIT(i, val);
+    }
+}
+"""
+
 # Your NumMatrix object will be instantiated and called as such:
 # obj = NumMatrix(matrix)
 # obj.update(row,col,val)

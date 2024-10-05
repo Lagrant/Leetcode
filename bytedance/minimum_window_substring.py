@@ -1,4 +1,4 @@
-from collections import Counter, defaultdict, deque
+from collections import Counter, defaultdict
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
         if len(s) < len(t):
@@ -44,5 +44,5 @@ class Solution:
         return mins
 
 if __name__ == '__main__':
-    s = Solution()
-    print(s.minWindow("baab", "bbb"))
+    so = Solution()
+    print(so.minWindow("baab", "bbb"))

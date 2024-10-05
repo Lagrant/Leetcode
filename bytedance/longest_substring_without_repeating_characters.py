@@ -15,5 +15,5 @@ class Solution:
         return max_l
     
 if __name__ == '__main__':
-    s = Solution()
-    print(s.lengthOfLongestSubstring("aabaab!bb"))
+    so = Solution()
+    print(so.lengthOfLongestSubstring("aabaab!bb"))

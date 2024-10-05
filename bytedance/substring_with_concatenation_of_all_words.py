@@ -46,5 +46,5 @@ class Solution:
 
 
 if __name__ == '__main__':
-    s = Solution()
-    print(s.findSubstring("barfoofoobarthefoobarman", ["bar","foo","the"]))
+    so = Solution()
+    print(so.findSubstring("barfoofoobarthefoobarman", ["bar","foo","the"]))

@@ -6,42 +6,48 @@ class ListNode:
         self.next = next
 class Solution:
     def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        h, t = self.sortList1(head)
-        return h
-    
-    def sortList1(self, head: Optional[ListNode]):
-        if head is None or head is not None and head.next is None:
-            return head, head
-        
+        if head is None:
+            return head
+        nodelist = []
         cur = head
-        piv = cur.next
-        prepiv, precur = cur, None
-        while piv is not None:
-            if cur.val > piv.val:
-                prepiv.next = piv.next
-                piv.next = head
-                if precur is None:
-                    precur = piv
-                head = piv
-                piv = prepiv.next
-            else:
-                prepiv =piv
-                piv = piv.next
-
-        tail = None
-        if cur.next is not None:
-            curnext, tail = self.sortList1(cur.next)
-            cur.next = curnext
-        if precur is not None:
-            precur.next = None
-            head, precur = self.sortList1(head)
-            if precur is not None:
-                precur.next = cur
-            else:
-                head = cur
-        return head, tail if tail is not None else cur
+        while cur is not None:
+            nodelist.append(cur)
+            cur = cur.next
+        nodelist = self.merge(nodelist)
+        cur = head = nodelist[0]
+        for i in range(1, len(nodelist)):
+            cur.next = nodelist[i]
+            cur = cur.next
+        cur.next = None
+        return head
     
+    def merge(self, nodelist):
+        if len(nodelist) == 0:
+            return []
+        if len(nodelist) == 1:
+            return nodelist
+        if len(nodelist) == 2:
+            if nodelist[0].val > nodelist[1].val:
+                nodelist[0], nodelist[1] = nodelist[1], nodelist[0]
+            return nodelist
+        piv = len(nodelist) // 2
+        nodelist1 = self.merge(nodelist[:piv])
+        nodelist2 = self.merge(nodelist[piv:])
+        ndl = []
+        i, j = 0, 0
+        while i < len(nodelist1) and j < len(nodelist2):
+            if nodelist1[i].val < nodelist2[j].val:
+                ndl.append(nodelist1[i])
+                i += 1
+            else:
+                ndl.append(nodelist2[j])
+                j += 1
+        if i < len(nodelist1):
+            ndl.extend(nodelist1[i:])
+        if j < len(nodelist2):
+            ndl.extend(nodelist2[j:])
+        return ndl
+
 if __name__ == '__main__':
     head = ListNode(3, ListNode(4, ListNode(1)))
     s = Solution()
-    print(s.sortList(head))

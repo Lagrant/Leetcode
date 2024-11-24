@@ -5,17 +5,13 @@ class Solution:
             
         pstack = []
         sval = ''
-        rskip = 0
-        for i, c in enumerate(s):
+        for c in s:
             if c != '(' and c != ')':
                 sval += c
             elif c == '(':
-                pstack.append(i - rskip)
+                pstack.append(len(sval))
                 sval += c
-            else:
-                if len(pstack) == 0:
-                    rskip += 1
-                    continue
+            elif len(pstack) != 0:
                 pstack.pop()
                 sval += c
         

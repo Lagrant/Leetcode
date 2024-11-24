@@ -17,9 +17,6 @@ class Solution:
                 heapq.heappush(dis_heap, p)
 
             elif (len(dis_heap) == k):
-                if (p.dis >= dis_heap[0].dis):
-
-                    heapq.heappop(dis_heap)
-                    heapq.heappush(dis_heap, p)
+                heapq.heappushpop(dis_heap, p)
         
         return [p.coor for p in dis_heap]

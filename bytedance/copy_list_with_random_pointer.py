@@ -1,6 +1,7 @@
 """
 # Definition for a Node.
 """
+from typing import Optional
 class Node:
     def __init__(self, x: int, next_: 'Node' = None, random: 'Node' = None):
         self.val = int(x)
@@ -34,3 +35,26 @@ class Solution:
                 if rd1.random == rd2:
                     cp1.random = cp2
         return cphead
+    
+    def copyRandomList2(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        if not head : return None
+
+        copy_node = {} # old : new 
+        copy_node[head] = Node(head.val)
+
+        current = head 
+
+        while current :
+            if current.next and current.next not in copy_node:
+                copy_node[current.next] = Node(current.next.val)
+            
+            copy_node[current].next = copy_node.get(current.next, None)  
+
+            if current.random and current.random not in copy_node:
+                copy_node[current.random] = Node(current.random.val)
+            
+            copy_node[current].random = copy_node.get(current.random, None)
+
+            current = current.next
+        
+        return copy_node[head]

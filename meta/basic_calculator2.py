@@ -14,8 +14,6 @@ class Solution:
         }
 
         while i < len(s):
-            if i >= len(s):
-                break
             if s[i] not in operator:
                 cumi, i = self.parse_int(s, i)
                 stack.append(cumi)
@@ -36,7 +34,7 @@ class Solution:
     
     def parse_int(self, s, i):
         cumi = ''
-        while i < len(s) and '0' <= s[i] <= '9':
+        while i < len(s) and s[i].isdigit():
             cumi += s[i]
             i += 1
         return int(cumi), i

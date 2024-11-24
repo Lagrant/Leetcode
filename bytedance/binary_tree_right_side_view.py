@@ -8,7 +8,7 @@ class TreeNode:
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
         if root is None:
-            return None
+            return []
         if root.left is None and root.right is None:
             return [root.val]
         layer1 = [root]

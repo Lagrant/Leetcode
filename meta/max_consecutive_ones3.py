@@ -10,8 +10,8 @@ class Solution:
             if nums[end] == 0:
                 if quota > 0:
                     quota -= 1
-                    maxones = max(maxones, end - start + 1)
                     end += 1
+                    maxones = max(maxones, end - start)
                 else:
                     if nums[start] == 0:
                         end += 1

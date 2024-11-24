@@ -6,9 +6,9 @@ class Solution:
         i, j = 0, len(nums) - 1
         mid = (i + j) // 2
         if max([nums[i], nums[j], nums[mid]]) == nums[i]:
-            return i + self.findPeakElement(nums[i: mid + 1])
+            return i + self.findPeakElement(nums[i: mid])
         elif max([nums[i], nums[j], nums[mid]]) == nums[j]:
-            return mid + self.findPeakElement(nums[mid:])
+            return mid + 1 + self.findPeakElement(nums[mid + 1:])
         else:
            p1 = self.findPeakElement(nums[:mid + 1])
            p2 = self.findPeakElement(nums[mid:])

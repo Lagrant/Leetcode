@@ -29,3 +29,9 @@ class Solution:
                 j -= 1
             nums[i], nums[j] = nums[j], nums[i]
         nums[i + 1 :] = sorted(nums[i + 1 :])
+
+if __name__ == '__main__':
+    s = Solution()
+    num = [1,2,3,4,6,5]
+    s.nextPermutation(num)
+    print(num)

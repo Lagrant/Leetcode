@@ -1,42 +1,26 @@
+from typing import List
 class Solution:
-    def findMissingRanges(self, nums, lower: int, upper: int):
-        if (len(nums) == 0):
-            return [str(lower)] if (lower == upper) else [f"{lower}->{upper}"]
-            
-        nums.sort()
+    def findMissingRanges(
+        self, nums: List[int], lower: int, upper: int
+    ) -> List[List[int]]:
+        n = len(nums)
+        missing_ranges = []
+        if n == 0:
+            missing_ranges.append([lower, upper])
+            return missing_ranges
 
-        m_ranges = []
-        num_ranges = []
-        for i in range(len(nums) - 1):
-            if (nums[i+1] - nums[i] >= 3):
-                num_ranges.append([nums[i] + 1, nums[i+1] - 1])
-            elif (nums[i+1] - nums[i] == 2):
-                num_ranges.append([nums[i] + 1])
-        
-        if (nums[0] > lower and nums[0] <= upper):
-            m_ = f"{lower}->{nums[0]-1}" if (lower != nums[0] - 1) else str(lower)
-            m_ranges.append(m_)
+        # Check for any missing numbers between the lower bound and nums[0].
+        if lower < nums[0]:
+            missing_ranges.append([lower, nums[0] - 1])
 
-        for nr in num_ranges:
-            if (len(nr) == 1):
-                if (nr[0] > lower and nr[0] < upper):
-                    m_ranges.append(str(nr[0]))
-            elif (nr[0] >= upper or nr[1] <= lower):
+        # Check for any missing numbers between successive elements of nums.
+        for i in range(n - 1):
+            if nums[i + 1] - nums[i] <= 1:
                 continue
-            elif (nr[0] < lower and nr[1] > upper):
-                return [f"{lower}->{upper}"]
-            elif (nr[0] < lower and nr[1] < upper):
-                m_ranges.append(f"{lower}->{nr[1]}")
-            elif (nr[0] > lower and nr[1] > upper):
-                m_ranges.append(f"{nr[0]}->{upper}")
-            else:
-                m_ranges.append(f"{nr[0]}->{nr[1]}")
-        
-        if (nums[-1] < upper and nums[-1] >= lower):
-            m_ = f"{nums[-1]+1}->{upper}" if (upper != nums[-1] + 1) else str(upper)
-            m_ranges.append(m_)
+            missing_ranges.append([nums[i] + 1, nums[i + 1] - 1])
 
-        return m_ranges
+        # Check for any missing numbers between the last element of nums and the upper bound.
+        if upper > nums[n - 1]:
+            missing_ranges.append([nums[n - 1] + 1, upper])
 
-sol = Solution()
-print(sol.findMissingRanges([-1], -1, -1))
+        return missing_ranges

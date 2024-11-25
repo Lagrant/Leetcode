@@ -17,3 +17,7 @@ class Solution:
             odd = palin(i, i)
             ans += even + odd
         return ans
+
+if __name__ == '__main__':
+    s = Solution()
+    print(s.countSubstrings('abccbabba'))
